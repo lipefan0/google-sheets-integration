@@ -19,11 +19,11 @@ class AuthBlinService(
         val tokenBling = TokenBling(
             accessToken = tokenResponse.accessToken,
             refreshToken = tokenResponse.refreshToken,
-            expiresIn = tokenResponse.expiresIn,
-            companyId = empresaDetails.id,
-            companyName = empresaDetails.nome,
-            createdAt = java.time.LocalDateTime.now(),
-            updatedAt = java.time.LocalDateTime.now()
+            expiresIn = LocalDateTime.now().plusSeconds(tokenResponse.expiresIn),
+            companyId = empresaDetails.data.id,
+            companyName = empresaDetails.data.nome,
+            createdAt = LocalDateTime.now(),
+            updatedAt = LocalDateTime.now()
         )
 
         tokenBlingRepository.save(tokenBling)
@@ -36,7 +36,7 @@ class AuthBlinService(
             val updatedTokenBling = tokenNeedRefresh.copy(
                 accessToken = tokenResponse.accessToken,
                 refreshToken = tokenResponse.refreshToken,
-                expiresIn = tokenResponse.expiresIn,
+                expiresIn = LocalDateTime.now().plusSeconds(tokenResponse.expiresIn),
                 updatedAt = LocalDateTime.now()
             )
             tokenBlingRepository.save(updatedTokenBling)

@@ -1,5 +1,6 @@
 package br.com.contis.google_sheets_integration.client
 
+import br.com.contis.google_sheets_integration.dto.empresa.ResponseDataEmpresaBlingDTO
 import br.com.contis.google_sheets_integration.dto.empresa.ResponseEmpresaBlingDTO
 import br.com.contis.google_sheets_integration.dto.token.ResponseTokenBlingDTO
 import org.springframework.beans.factory.annotation.Value
@@ -52,11 +53,11 @@ class AuthBlingClient(
             .awaitBody<ResponseTokenBlingDTO>()
     }
 
-    suspend fun getEmpresaDetails(accessToken: String): ResponseEmpresaBlingDTO {
+    suspend fun getEmpresaDetails(accessToken: String): ResponseDataEmpresaBlingDTO {
         return webClient.get()
             .uri("/empresas/me/dados-basicos")
             .header("Authorization", "Bearer $accessToken")
             .retrieve()
-            .awaitBody<ResponseEmpresaBlingDTO>()
+            .awaitBody<ResponseDataEmpresaBlingDTO>()
     }
 }
