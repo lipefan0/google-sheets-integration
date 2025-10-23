@@ -19,7 +19,7 @@ data class TokenBling(
     @Column(name = "refresh_token")
     val refreshToken: String,
     @Column(name = "expires_in")
-    val expiresIn: Long,
+    val expiresIn: LocalDateTime,
     @Column(name = "company_id")
     val companyId: String,
     @Column(name = "company_name")
